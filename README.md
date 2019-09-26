@@ -1,19 +1,22 @@
 # Bestiary
 A bestiary of analysable words
 
-## Verif.py
+## verif.py
 Calculates the density in the neighbourhood of Levenshtein of a word taken as a parameter.
+This is not optimal because it's an enumeration of all words.
+This script was create to verify the output of wordborhood.
 
 ### Argument:
-word whose density is calculated
+The word to compute the neighborhood density
 
 ### Optional arguments:
--k : Levenshtein distance (default = 4)  
--a : size of the alphabet (default = 2)  
--n : word size (default =5)  
+* k : Levenshtein distance (default = 4)
+* a : size of the alphabet (default = 2)
 
-## Classement.py :
-Lists all words of size n for an alphabet of size a, calculates their density in the neighbourhood of Levenshtein using the wordborhood algorithm and orders the result into a .tsv file in order to exploit the data with spreadsheet software.
+## classement.py :
+Lists all words of size n for an alphabet of size a.
+Then calculates their density regarding the Levenshtein neighbourhood using the wordborhood algorithm.
+The results are sorted into a .tsv file.
 
 ### Optional arguments:
 -k : Levenshtein distance (default = 2)   

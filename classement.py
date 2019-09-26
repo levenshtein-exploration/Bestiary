@@ -7,18 +7,16 @@ from itertools import product, repeat
 #Manages arguments:
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-a", type=int, default=2) #alphabet size
-    parser.add_argument("-n", type=int, default=4) #word size
-    parser.add_argument("-k", type=int, default=2) #distance
+    parser.add_argument("-a", type=int, help="Alphabet size (first letter will be a)", default=2) #alphabet size
+    parser.add_argument("-n", type=int, help="Word size", default=4) #word size
+    parser.add_argument("-k", type=int, help="", default=2) #distance
     args = parser.parse_args() 
     return args
 
 #Creates a list of all words of size n for an alphabet of size a, write the list to a text file "temp.txt" and return the list:
 def temp_maker(a, n):
-    alphabet=""
     list_mots=[]
-    for letter in list(map(chr, range(ord("a"), ord("a")+a))):
-        alphabet+=letter
+    alphabet = [chr(ord("a")+x) for x in range(args.a)]
     iteration=product(alphabet,repeat=n)    
     for element in iteration:
         list_mots.append(str(element).replace("', '","").strip("('')"))
