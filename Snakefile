@@ -24,7 +24,7 @@ rule wordborhood:
     output:
         "{workdir}/a={a}/n={n}/counts_{k}.tsv"
     shell:
-        "wordborhood -w {input.words} -a {wildcards.a} -k {wildcards.k} > {output}"
+        f"wordborhood -w {{input.words}} -a {{wildcards.a}} -d {config.get('dula_path')}/dula{{wildcards.k}}.fsm -k {{wildcards.k}} > {{output}}"
 
 
 rule generate_words:
