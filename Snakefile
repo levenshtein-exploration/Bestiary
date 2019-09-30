@@ -1,11 +1,32 @@
 
-W_SIZES = list(range(1, 5))
+W_SIZES = list(range(1, 10))
 A_SIZES = list(range(2, 5))
 Ks = list(range(1, 3))
 
 rule all:
     input:
-        expand("data/a={a}/n={s}/global_count.tsv", a=A_SIZES, s=W_SIZES)
+        "data/results/file_list.txt"
+        # expand("data/results/a{a}_n{s}.tsv", a=A_SIZES, s=W_SIZES)
+
+
+rule leviewer_file:
+    input:
+        expand("data/results/a{a}_n{s}.tsv", a=A_SIZES, s=W_SIZES)
+    output:
+        "data/results/file_list.txt"
+    run:
+        shell("echo '' > {output}")
+        for elem in input:
+            shell(f"echo {elem.split('/')[-1]} >> {{output}}")
+
+
+rule aglomerate_results:
+    input:
+        "data/a={a}/n={s}/global_count.tsv"
+    output:
+        "data/results/a{a}_n{s}.tsv"
+    shell:
+        "cp {input} {output}"
 
 
 rule global_count:
